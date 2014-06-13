@@ -1,8 +1,7 @@
-'use strict';
-
 angular.module('user.pages.controllers')
   .controller('MainCtrl', function ($scope) {
     console.log($scope);
+
     // @TODO retrieve properly though GET request
     $scope.pets = [
       {
@@ -30,4 +29,9 @@ angular.module('user.pages.controllers')
         updateStatus: 'normal'
       }
     ];
+
+    $scope.expand = function(pet) {
+      pet.show = !pet.show;
+    };
+
   });

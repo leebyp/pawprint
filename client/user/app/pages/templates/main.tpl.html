@@ -1,5 +1,5 @@
-<div ng-controller='MainCtrl'>
-  <button ui-sref='^.profile' type="login" class="btn btn-default">PROFILE</button>
+<div ng-controller="MainCtrl">
+  <button ui-sref="^.profile" type="login" class="btn btn-default">PROFILE</button>
 
   <center>
     <img src="assets/logo.png"/>
@@ -8,7 +8,7 @@
   <div class="">
     <div class="">
       <!-- @TODO make a directive for pets properly -->
-      <div class="panel panel-default" ng-repeat='pet in pets' ng-click="isCollapsed = !isCollapsed">
+      <div class="panel panel-default" ng-repeat='pet in pets' ng-click="expand(pet)">
         <div class="panel-heading">
           <h4 class="panel-title">
             <table class="" style="width:100%">
@@ -16,30 +16,30 @@
                 <td>
                   <img class='petImg' ng-src='{{pet.imgUrl}}'/>
                 </td>
-                <td>{{pet.name}}</td>
-                <td>{{pet.age}}</td>
-                <td>{{pet.vet}}</td>
+                <td>Name: {{pet.name}}</td>
+                <td>Age: {{pet.age}}</td>
+                <td>Vetenarian: {{pet.vet}}</td>
                 <td ng-switch='pet.vaccineStatus'>
+                  Vaccine:
                   <span ng-switch-when='active' class="label label-success">Active</span>
                   <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
                   <span ng-switch-when='expired' class="label label-danger">Expired</span>
+                </td>
+                <td ng-switch="pet.updateStatus">
+                  Updates:
+                  <span ng-switch-when="normal" class="label label-success">Normal</span>
+                  <span ng-switch-when="pending" class="label label-warning">Pending</span>
                 </td>
               </tr>
             </table>
           </h4>
         </div>
-        <div collapse="isCollapsed">
+        <div ng-show="pet.show">
           <div class="panel-body">
-            <p ng-switch='pet.updateStatus'>
-              Updates:
-              <span ng-switch-when='normal' class="label label-success">Normal</span>
-              <span ng-switch-when='pending' class="label label-warning">Pending</span>
-            </p>
-            MORE CONTENT
+            <h1>Yo wassup dawwwwwwwg</h1>
           </div>
         </div>
       </div>
-      <!-- End pet profile instance -->
     </div>
   </div>
 </div>
