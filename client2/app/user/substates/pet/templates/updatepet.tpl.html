@@ -1,0 +1,68 @@
+<form ng-submit="ok()" class="form-horizontal">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Vet Details</legend>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">Practice Name</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.practice_name" class="form-control">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">Website</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.website" class="form-control">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">Street Address</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.street_address" class="form-control">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">City</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.city" class="form-control">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">Zip</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.zip" class="form-control">
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-sm-2 control-label" for="textinput">Phone</label>
+      <div class="col-sm-10">
+        <input type="text" ng-model="request.vet.phone" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div>
+          
+        </div>
+        <div class="pull-right">
+          <button type="button" ng-click="cancel()" class="btn btn-primary">CANCEL</button>
+          <button type="submit" class="btn btn-primary">UPDATE</button>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+</form>

@@ -15,7 +15,7 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.logError);
   app.use(middle.handleError);
   // Set up routes
-  app.use(express.static(__dirname+'/../../client/user'));
+  app.use(express.static(__dirname+'/../../client2'));
   app.use('/admin', express.static(__dirname+'/../../client/admin'));
   app.use('/admin', routers.AdminRouter);
   app.use('/user', routers.UserRouter);
