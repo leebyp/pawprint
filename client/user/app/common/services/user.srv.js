@@ -1,6 +1,6 @@
-angular.module('user.pages.services')
+angular.module('user.common.services')
 
-  .factory('UserFactory', function (Restangular, $http){
+  .service('UserService', function (Restangular){
 
     function postUserSignup (data) {
       // return Restangular.all('user/signup').post(data);
@@ -20,11 +20,9 @@ angular.module('user.pages.services')
       return Restangular.one('user', id).remove();
     }
 
-    return {
-      postUserSignup: postUserSignup,
-      postUserLogin: postUserLogin,
-      getUser: getUser,
-      deleteUser: deleteUser
-    };
+      this.postUserSignup = postUserSignup;
+      this.postUserLogin = postUserLogin;
+      this.getUser = getUser;
+      this.deleteUser = deleteUser;
 
   });

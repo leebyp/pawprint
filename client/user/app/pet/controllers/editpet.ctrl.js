@@ -1,4 +1,4 @@
-angular.module('user.pages.controllers')
+angular.module('user.pet.controllers')
 
   .controller('EditPetCtrl', function ($scope, $modalInstance, pet) {
 

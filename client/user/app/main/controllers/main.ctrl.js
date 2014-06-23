@@ -1,26 +1,26 @@
-angular.module('user.pages.controllers')
+angular.module('user.main.controllers')
 
-  .controller('MainCtrl', function ($scope, $modal, UserFactory, CurrentUserFactory, PetFactory, VaccineFactory, Restangular) {
+  .controller('MainCtrl', function ($scope, $modal, UserService, CurrentUserService, PetService, VaccineService, Restangular) {
     console.log($scope);
-    console.log(CurrentUserFactory.getUserId());
+    console.log(CurrentUserService.getUserId());
 
-    $scope.userId = CurrentUserFactory.getUserId();
+    $scope.userId = CurrentUserService.getUserId();
     $scope.pets = [];
     $scope.vaccines = [];
     $scope.requests = [];
-    $scope.checkExpiry = VaccineFactory.checkExpiry;
+    $scope.checkExpiry = VaccineService.checkExpiry;
 
-    PetFactory.getPets($scope.userId).then(function (pets) {
+    PetService.getPets($scope.userId).then(function (pets) {
       $scope.pets = pets;
 
       for (var i=0; i<$scope.pets.length; i++){
-        PetFactory.getPetVaccines($scope.userId, $scope.pets[i].id)
+        PetService.getPetVaccines($scope.userId, $scope.pets[i].id)
           .then(function (response) {
             $scope.vaccines.push(response);
           }, function (error) {
             console.log(error);
           });
-        PetFactory.getPetRequests($scope.userId, $scope.pets[i].id)
+        PetService.getPetRequests($scope.userId, $scope.pets[i].id)
           .then(function (response) {
             $scope.requests.push(response);
           }, function (error) {
@@ -30,7 +30,7 @@ angular.module('user.pages.controllers')
     });
     
     $scope.cancelRequest = function (petIndex, requestIndex) {
-      PetFactory.cancelPetRequest($scope.userId, $scope.pets[petIndex].id, $scope.requests[petIndex][requestIndex])
+      PetService.cancelPetRequest($scope.userId, $scope.pets[petIndex].id, $scope.requests[petIndex][requestIndex])
         .then(function (response) {
           $scope.requests[petIndex].splice(requestIndex, 1);
         }, function (error) {
@@ -41,7 +41,7 @@ angular.module('user.pages.controllers')
     $scope.addPet = function () {
 
       var modalInstance = $modal.open({
-        templateUrl: 'app/pages/templates/editpet.tpl.html',
+        templateUrl: 'app/pet/templates/editpet.tpl.html',
         controller: 'EditPetCtrl',
         resolve: {
           pet: function () {
@@ -51,17 +51,18 @@ angular.module('user.pages.controllers')
       });
 
       modalInstance.result.then(function (pet) {
-        PetFactory.postPet($scope.userId, pet).then(function (petResponse) {
+        console.log(pet);
+        PetService.postPet($scope.userId, pet).then(function (petResponse) {
           console.log('successfully created pet');
           console.log(petResponse);
           $scope.pets.push(petResponse);
-          PetFactory.getPetVaccines($scope.userId, petResponse.id)
+          PetService.getPetVaccines($scope.userId, petResponse.id)
             .then(function (response) {
               $scope.vaccines.push(response);
             }, function (error) {
               console.log(error);
             });
-          PetFactory.getPetRequests($scope.userId, petResponse.id)
+          PetService.getPetRequests($scope.userId, petResponse.id)
             .then(function (response) {
               $scope.requests.push(response);
             }, function (error) {
@@ -78,7 +79,7 @@ angular.module('user.pages.controllers')
     
       console.log($scope.pets[index]);
       var modalInstance = $modal.open({
-        templateUrl: 'app/pages/templates/editpet.tpl.html',
+        templateUrl: 'app/pet/templates/editpet.tpl.html',
         controller: 'EditPetCtrl',
         resolve: {
           pet: function () {
@@ -114,7 +115,7 @@ angular.module('user.pages.controllers')
       });
 
       modalInstance.result.then(function (request) {
-        PetFactory.postPetRequest(request.userId, request.petId, request).then(function (response) {
+        PetService.postPetRequest(request.userId, request.petId, request).then(function (response) {
           console.log('successfully sent pet update request');
           console.log($scope.requests, 'requests');
           $scope.requests[index].push(response);

@@ -1,6 +1,6 @@
-angular.module('user.pages.controllers')
+angular.module('user.signup.controllers')
   
-  .controller('SignupCtrl', function ($scope, $state, UserFactory, CurrentUserFactory) {
+  .controller('SignupCtrl', function ($scope, $state, UserService, CurrentUserService) {
     console.log($scope);
 
     $scope.user = {
@@ -9,9 +9,9 @@ angular.module('user.pages.controllers')
     };
 
     $scope.userSignup = function () {
-      UserFactory.postUserSignup($scope.user)
+      UserService.postUserSignup($scope.user)
         .then(function (response) {
-          CurrentUserFactory.setUserId(response.id);
+          CurrentUserService.setUserId(response.id);
           $state.go('app.profile');
         }, function (error) {
           console.log(error);

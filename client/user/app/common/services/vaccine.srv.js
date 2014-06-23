@@ -1,6 +1,6 @@
-angular.module('user.pages.services')
+angular.module('user.common.services')
 
-  .factory('VaccineFactory', function () {
+  .service('VaccineService', function () {
 
     function checkExpiry (vaccine) {
       var now = Date.now();
@@ -16,8 +16,6 @@ angular.module('user.pages.services')
       }
     }
 
-    return {
-      checkExpiry: checkExpiry
-    };
+    this.checkExpiry = checkExpiry;
 
   });

@@ -1,8 +1,8 @@
-angular.module('user.pages.controllers')
+angular.module('user.pet.controllers')
 
-  .controller('UpdatePetCtrl', function ($scope, $modalInstance, pet, CurrentUserFactory) {
+  .controller('UpdatePetCtrl', function ($scope, $modalInstance, pet, CurrentUserService) {
 
-    $scope.userId = CurrentUserFactory.getUserId();
+    $scope.userId = CurrentUserService.getUserId();
     $scope.pet = pet;
     $scope.request = {
       userId: $scope.userId,

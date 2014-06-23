@@ -1,12 +1,12 @@
-angular.module('user.pages.services')
+angular.module('user.common.services')
 
-  .factory('VetFactory', function ($http, Restangular) {
+  .service('VetService', function (Restangular) {
 
-    function getVets () {
-      return Restangular.all('vets').getList().then(function (vets){
-        return vets;
-      });
-    }
+    // function getVets () {
+    //   return Restangular.all('vets').getList().then(function (vets){
+    //     return vets;
+    //   });
+    // }
 
     //==========================================//
     //@NOTE dummy functions returning dummy data//
@@ -41,8 +41,6 @@ angular.module('user.pages.services')
       ];
     }
 
-    return {
-      getVets: getVets
-    };
+  this.getVets = getVets;
 
   });

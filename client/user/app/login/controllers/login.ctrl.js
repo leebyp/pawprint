@@ -1,6 +1,6 @@
-angular.module('user.pages.controllers')
+angular.module('user.login.controllers')
 
-  .controller('LoginCtrl', function ($scope, $state, UserFactory, CurrentUserFactory) {
+  .controller('LoginCtrl', function ($scope, $state, UserService, CurrentUserService) {
     console.log($scope);
 
     $scope.user = {
@@ -9,9 +9,9 @@ angular.module('user.pages.controllers')
     };
 
     $scope.userLogin = function () {
-      UserFactory.postUserLogin($scope.user)
+      UserService.postUserLogin($scope.user)
         .then(function (response) {
-          CurrentUserFactory.setUserId(response.id);
+          CurrentUserService.setUserId(response.id);
           $state.go('app.main');
         }, function (error) {
           $scope.loginError = true;

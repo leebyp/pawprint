@@ -1,16 +1,4 @@
-'use strict';
-
-angular.module('user.pages', [
-  'ui.router',
-  'ui.bootstrap',
-  'restangular',
-
-  'user.pages.controllers',
-  'user.pages.directives',
-  'user.pages.services'
-]);
-
-angular.module('user.pages')
+angular.module('user')
   .config(function ($stateProvider) {
 
   // routing states, setting templates and controllers to use
@@ -21,21 +9,21 @@ angular.module('user.pages')
       template: '<div ui-view class="realm"></div>'
     })
 
-    .state('public.home', {
+    .state('public.landing', {
       url: '',
-      templateUrl: 'app/pages/templates/home.tpl.html',
-      controller: 'HomeCtrl'
+      templateUrl: 'app/landing/templates/landing.tpl.html',
+      controller: 'LandingCtrl'
     })
 
     .state('public.login', {
       url: 'login',
-      templateUrl: 'app/pages/templates/login.tpl.html',
+      templateUrl: 'app/login/templates/login.tpl.html',
       controller: 'LoginCtrl'
     })
 
     .state('public.signup', {
       url: 'signup',
-      templateUrl: 'app/pages/templates/signup.tpl.html',
+      templateUrl: 'app/signup/templates/signup.tpl.html',
       controller: 'SignupCtrl'
     })
 
@@ -47,18 +35,14 @@ angular.module('user.pages')
 
     .state('app.main', {
       url: '',
-      templateUrl: 'app/pages/templates/main.tpl.html',
+      templateUrl: 'app/main/templates/main.tpl.html',
       controller: 'MainCtrl'
     })
 
     .state('app.profile', {
       url: '^/profile',
-      templateUrl: 'app/pages/templates/profile.tpl.html',
+      templateUrl: 'app/profile/templates/profile.tpl.html',
       controller: 'ProfileCtrl'
     });
 
   });
-
-angular.module('user.pages.controllers', []);
-angular.module('user.pages.directives', []);
-angular.module('user.pages.services', []);

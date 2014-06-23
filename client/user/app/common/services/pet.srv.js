@@ -1,6 +1,6 @@
-angular.module('user.pages.services')
+angular.module('user.common.services')
 
-  .factory('PetFactory', function (Restangular, $http) {
+  .service('PetService', function (Restangular) {
 
     function postPet (id, data) {
       return Restangular.one('user', id).all('pets').post(data);
@@ -26,13 +26,11 @@ angular.module('user.pages.services')
       return Restangular.one('user', userId).one('pets', petId).one('requests', requestId).remove();
     }
 
-    return {
-      postPet: postPet,
-      getPets: getPets,
-      getPetVaccines: getPetVaccines,
-      postPetRequest: postPetRequest,
-      getPetRequests: getPetRequests,
-      cancelPetRequest: cancelPetRequest
-    };
+    this.postPet = postPet;
+    this.getPets = getPets;
+    this.getPetVaccines = getPetVaccines;
+    this.postPetRequest = postPetRequest;
+    this.getPetRequests = getPetRequests;
+    this.cancelPetRequest = cancelPetRequest;
 
   });

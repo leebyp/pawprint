@@ -1,9 +1,9 @@
-angular.module('user.pages.controllers')
-  .controller('ProfileCtrl', function ($scope, $state, UserFactory, CurrentUserFactory) {
+angular.module('user.profile.controllers')
+  .controller('ProfileCtrl', function ($scope, $state, UserService, CurrentUserService) {
     console.log($scope);
 
-    $scope.userId = CurrentUserFactory.getUserId();
-    UserFactory.getUser($scope.userId).then(function (response) {
+    $scope.userId = CurrentUserService.getUserId();
+    UserService.getUser($scope.userId).then(function (response) {
       // console.log(response);
       $scope.user = response;
     });
@@ -26,10 +26,10 @@ angular.module('user.pages.controllers')
     };
     
     $scope.deleteUser = function() {
-      UserFactory.deleteUser($scope.userId).then(function (response) {
+      UserService.deleteUser($scope.userId).then(function (response) {
         console.log('deleted user');
         // @NOTE delete the local auth settings
-        CurrentUserFactory.setUserId(null);
+        CurrentUserService.setUserId(null);
         $state.go('public.home');
       }, function (error) {
         console.log(error);

@@ -1,6 +1,6 @@
-angular.module('user.pages.services')
+angular.module('user.common.services')
 
-  .factory('CurrentUserFactory', function () {
+  .service('CurrentUserService', function () {
 
     var currentUser = null;
 
@@ -12,9 +12,7 @@ angular.module('user.pages.services')
       return currentUser;
     }
 
-    return {
-      setUserId: setUserId,
-      getUserId: getUserId
-    };
+    this.setUserId = setUserId;
+    this.getUserId = getUserId;
 
   });
