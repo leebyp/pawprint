@@ -1,9 +1,17 @@
-// top level app module generation, injecting .common and .pages dependencies
+'use strict';
+
 angular.module('user', [
   'ui.router',
+  'ui.bootstrap',
+  'restangular',
 
   'user.common',
-  'user.pages'
+  'user.landing',
+  'user.login',
+  'user.main',
+  'user.pet',
+  'user.profile',
+  'user.signup'
 ]);
 
 angular.module('user')

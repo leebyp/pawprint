@@ -16,42 +16,49 @@
   </head>
 
   <body ng-app="user">
+
     <!-- template loaded here -->
     <div class='container' ui-view></div>
 
     <!-- bower scripts -->
     <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <!-- <script src="bower_components/ng-FX/dist/ng-Fx.min.js"></script> -->
     <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="../bower_components/restangular/src/restangular.js"></script>
 
     <!-- build script -->
     <script src="app/app.js"></script>
+    <script src="app/routes.js"></script>
 
     <!-- common scripts -->
     <script src="app/common/module.js"></script>
+    <script src="app/common/services/user.srv.js"></script>
+    <script src="app/common/services/vet.srv.js"></script>
+    <script src="app/common/services/vaccine.srv.js"></script>
+    <script src="app/common/services/currentuser.srv.js"></script>
+    <script src="app/common/services/pet.srv.js"></script>
+    
+    <!-- feature scripts -->
+    <script src="app/landing/module.js"></script>
+    <script src="app/landing/controllers/landing.ctrl.js"></script>
 
-    <script src="app/common/services/utils.srv.js"></script>
+    <script src="app/login/module.js"></script>
+    <script src="app/login/controllers/login.ctrl.js"></script>
 
-    <!-- pages scripts -->
-    <script src="app/pages/module.js"></script>
+    <script src="app/main/module.js"></script>
+    <script src="app/main/controllers/main.ctrl.js"></script>
 
-    <script src="app/pages/controllers/home.ctrl.js"></script>
-    <script src="app/pages/controllers/login.ctrl.js"></script>
-    <script src="app/pages/controllers/main.ctrl.js"></script>
-    <script src="app/pages/controllers/profile.ctrl.js"></script>
-    <script src="app/pages/controllers/signup.ctrl.js"></script>
-    <script src="app/pages/controllers/editpet.ctrl.js"></script>
-    <script src="app/pages/controllers/updatepet.ctrl.js"></script>
+    <script src="app/pet/module.js"></script>
+    <script src="app/pet/controllers/editpet.ctrl.js"></script>
+    <script src="app/pet/controllers/updatepet.ctrl.js"></script>
 
-    <script src="app/pages/services/user.srv.js"></script>
-    <script src="app/pages/services/vet.srv.js"></script>
-    <script src="app/pages/services/vaccine.srv.js"></script>
-    <script src="app/pages/services/currentuser.srv.js"></script>
-    <script src="app/pages/services/pet.srv.js"></script>
+    <script src="app/profile/module.js"></script>
+    <script src="app/profile/controllers/profile.ctrl.js"></script>
+
+    <script src="app/signup/module.js"></script>
+    <script src="app/signup/controllers/signup.ctrl.js"></script>
+
   </body>
 
 </html>
