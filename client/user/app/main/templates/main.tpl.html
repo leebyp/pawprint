@@ -4,12 +4,12 @@
     <img src="assets/logo.png"/>
   </center>
 
-  <button ng-click='CurrentPetsService.addPet(userId)' class="btn btn-default">Add Pet</button>
+  <button ng-click='CurrentPetsService.addPet()' class="btn btn-default">Add Pet</button>
   <button ui-sref="^.profile" class="btn btn-default">User profile</button>
 
   <table class="" style="width:100%">
     <tr ng-repeat="pet in pets.pets">
-      <td pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index"></td>
+      <td pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index" userId="userId"></td>
     </tr>
   </table>
 
