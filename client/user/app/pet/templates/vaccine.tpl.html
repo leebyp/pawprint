@@ -1,0 +1,7 @@
+<td>{{vaccine.name}}</td>
+<td>{{vaccine.dateExpired}}</td>
+<td>
+  <span ng-if='VaccineService.checkExpiry(vaccine) === "active"' class="label label-success">Active</span>
+  <span ng-if='VaccineService.checkExpiry(vaccine) === "expiring"' class="label label-warning">Expiring</span>
+  <span ng-if='VaccineService.checkExpiry(vaccine) === "expired"' class="label label-danger">Expired</span>
+</td>

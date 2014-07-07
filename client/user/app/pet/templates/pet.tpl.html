@@ -1,0 +1,58 @@
+<accordion close-others="false">
+  <accordion-group>
+    <accordion-heading style="display:block">
+      <table class="" style="width:100%">
+        <tr>
+          <td>
+            <img class='petImg' ng-src='{{pet.profilePic}}'/>
+          </td>
+          <td>
+            <label> Name: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.name"></input> </label>
+            <label> Gender: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.gender"></input> </label>
+            <label> Color: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.color"></input> </label>
+            <label> Weight: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.weight"></input> </label>
+            <label> Neuter: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.neuter"></input> </label>
+            <label> Microchip #: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.microchip"></input> </label>
+            <label> Birthday: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.birthdate"></input> </label>
+            <label> Breed: <input ng-click="stopPropagation()" ng-readonly="!editingPet" ng-model="pet.breed"></input> </label>
+          </td>
+          <td>
+            <button ng-if="!editingPet" class="btn btn-default" ng-click="editPet(pet)">EDIT</button>
+            <button ng-if="editingPet" class="btn btn-default" ng-click="savePet(index)">SAVE</button>
+            <button ng-if="editingPet" class="btn btn-default" ng-click="cancelEdit()">CANCEL</button>
+            <button class="btn btn-default">SEND</button>
+            <button ng-click="updatePet(userId, index)" class="btn btn-default">UPDATE</button>
+          </td>
+          <td>
+            <div ng-switch='pet.vaccineStatus'>
+              Vaccines:
+              <span ng-switch-when='active' class="label label-success">Active</span> 
+              <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
+              <span ng-switch-when='expired' class="label label-danger">Expired</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </accordion-heading>
+    <alert ng-repeat="request in requests" type="warning" close="cancelRequest(userId, index, $index)">
+      We are processing your request to {{request.vet.practice_name}}
+    </alert>
+    <table class="" style="width:100%">
+      <tr>
+        <td>Vaccine</td>
+        <td>Expiration</td>
+        <td>Status</td>
+      </tr>
+      <tr ng-repeat="vaccine in vaccines">
+        <td>{{vaccine.name}}</td>
+        <td>{{vaccine.dateExpired}}</td>
+        <td>
+          <span ng-if="VaccineService.checkExpiry(vaccine) === 'active'" class="label label-success">Active</span>
+          <span ng-if="VaccineService.checkExpiry(vaccine) === 'expiring'" class="label label-warning">Expiring</span>
+          <span ng-if="VaccineService.checkExpiry(vaccine) === 'expired'" class="label label-danger">Expired</span>
+        </td>
+      </tr>
+    </table>
+  </accordion-group>
+</accordion>
+<!-- End pet profile instance -->

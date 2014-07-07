@@ -1,0 +1,1 @@
+<alert ng-if="request.status === 'New' || request.status === 'Pending'" type="warning" close="cancelRequest($parent.index, $index)">We are processing your request to {{request.vet.practice_name}}</alert>
