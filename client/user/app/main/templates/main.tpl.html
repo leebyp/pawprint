@@ -7,69 +7,10 @@
   <button ng-click='CurrentPetsService.addPet(userId)' class="btn btn-default">Add Pet</button>
   <button ui-sref="^.profile" class="btn btn-default">User profile</button>
 
-  <!-- @TODO make a directive for pets properly -->
-  <accordion close-others="false">
-    <accordion-group ng-repeat="pet in pets.pets">
-      <accordion-heading style="display:block">
-        <table class="" style="width:100%">
-          <tr>
-            <td>
-              <img class='petImg' ng-src='{{pet.profilePic}}'/>
-            </td>
-            <td>Name: {{pet.name}}</td>
-            <td>Birthday: {{pet.birthdate}}</td>
-            <td>Breed: {{pet.breed}}</td>
-            <td ng-switch='pet.vaccineStatus'>
-              Vaccines:
-              <span ng-switch-when='active' class="label label-success">Active</span> 
-              <span ng-switch-when='expiring' class="label label-warning">Expiring</span>
-              <span ng-switch-when='expired' class="label label-danger">Expired</span>
-            </td>
-          </tr>
-        </table>
-      </accordion-heading>
-      <table class="" style="width:100%">
-        <tr>
-          <td>
-            <p>Gender: {{pet.gender}}</p>
-            <p>Color: {{pet.color}}</p>
-            <p>Weight: {{pet.weight}}</p>
-            <p>Neuter: {{pet.neuter}}</p>
-            <p>Microchip #: {{pet.microchip}}</p>
-          </td>
-          <td>
-            <button ng-click="CurrentPetsService.editPet(userId, $index)" class="btn btn-default">EDIT</button>
-          </td>
-          <td>
-            <button class="btn btn-default">SEND</button>
-          </td>
-          <td>
-            <button ng-click="CurrentPetsService.updatePet(userId, $index)" class="btn btn-default">UPDATE</button>
-          </td>
-        </tr>
-      </table>
-      <table>
-        <tr ng-repeat="request in pets.requests[$parent.$index]">
-          <alert ng-if="request.status === 'New' || request.status === 'Pending'" type="warning" close="cancelRequest($parent.index, $index)">We are processing your request to {{request.vet.practice_name}}</alert>
-        </tr>
-      </table>
-      <table class="" style="width:100%">
-        <tr>
-          <td>Vaccine</td>
-          <td>Expiration</td>
-          <td>Status</td>
-        </tr>
-        <tr ng-repeat="vaccine in pets.vaccines[$parent.$index]">
-          <td>{{vaccine.name}}</td>
-          <td>{{vaccine.dateExpired}}</td>
-          <td>
-            <span ng-if='VaccineService.checkExpiry(vaccine) === "active"' class="label label-success">Active</span>
-            <span ng-if='VaccineService.checkExpiry(vaccine) === "expiring"' class="label label-warning">Expiring</span>
-            <span ng-if='VaccineService.checkExpiry(vaccine) === "expired"' class="label label-danger">Expired</span>
-          </td>
-        </tr>
-      </table>
-    </accordion-group>
-  </accordion>
-  <!-- End pet profile instance -->
+  <table class="" style="width:100%">
+    <tr ng-repeat="pet in pets.pets">
+      <td pet="pet" requests="pets.requests[$index]" vaccines="pets.vaccines[$index]" index="$index"></td>
+    </tr>
+  </table>
+
 </div>
