@@ -2,7 +2,7 @@
 
 angular.module('user.pet', [
 
-  'user.pet.controllers'
+  'user.pet.directives'
 ]);
 
-angular.module('user.pet.controllers', []);
+angular.module('user.pet.directives', []);
