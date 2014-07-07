@@ -45,7 +45,6 @@
 var getter = function (Model, options) {
   return function(req, res) {
     options = options || {}; // Protects against null options, b/c options required
-    console.log('pikaaaaaaaaaaaaaaaaaaaaaaaa');
     // Get parameters from req.params
     var query = options.query || {};
     var params = {};
