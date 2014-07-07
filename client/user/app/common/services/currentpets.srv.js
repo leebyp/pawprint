@@ -59,7 +59,7 @@ angular.module('user.common.services')
     }
 
     function cancelRequest (userId, petIndex, requestIndex) {
-      PetRESTService.cancelPetRequest(userId, pets.pets[petIndex].id, pets.requests[petIndex][requestIndex])
+      PetRESTService.cancelPetRequest(userId, pets.pets[petIndex].id, pets.requests[petIndex][requestIndex].id)
         .then(function (response) {
           pets.requests[petIndex].splice(requestIndex, 1);
         }, function (error) {
@@ -67,67 +67,17 @@ angular.module('user.common.services')
         });
     }
 
-    function addPet (userId) {
-
-      var modalInstance = $modal.open({
-        templateUrl: 'app/pet/templates/editpet.tpl.html',
-        controller: 'EditPetCtrl',
-        resolve: {
-          pet: function () {
-            return {};
-          }
-        }
-      });
-
-      modalInstance.result.then(function (pet) {
-        console.log(pet);
-        PetRESTService.postPet(userId, pet).then(function (petResponse) {
-          console.log('successfully created pet');
-          console.log(petResponse);
-          pets.pets.push(petResponse);
-          PetRESTService.getPetVaccines(userId, petResponse.id)
-            .then(function (response) {
-              pets.vaccines.push(response);
-            }, function (error) {
-              console.log(error);
-            });
-          PetRESTService.getPetRequests(userId, petResponse.id)
-            .then(function (response) {
-              pets.requests.push(response);
-            }, function (error) {
-              console.log(error);
-            });
-        }, function (error) {
-          console.log(error);
-        });
-      });
+    function addPet(userId) {
+      var newPet = {};
+      pets.pets.push(newPet);
     }
 
-    function editPet (userId, index) {
-    
-      console.log(pets.pets[index]);
-      var modalInstance = $modal.open({
-        templateUrl: 'app/pet/templates/editpet.tpl.html',
-        controller: 'EditPetCtrl',
-        resolve: {
-          pet: function () {
-            return Restangular.copy(pets.pets[index]);
-          }
-        }
+    function savePet (index) {
+      pets.pets[index].put().then(function (response) {
+        pets.pets[index] = response;
+      }, function (error) {
+        console.log(error);
       });
-
-      modalInstance.result.then(function (pet) {
-        console.log(pet);
-        pet.put().then(function (response) {
-          console.log(response);
-          pets.pets[index] = response;
-        }, function (error) {
-          console.log(error);
-        });
-      }, function () {
-        console.log('Modal dismissed');
-      });
-
     }
 
     function updatePet (userId, index) {
@@ -156,11 +106,15 @@ angular.module('user.common.services')
 
     }
 
+    function updatePet (userId, index) {
+      //need to confirm what to do here
+    }
+
     this.retrievePets = retrievePets;
     this.getPets = getPets;
     this.cancelRequest = cancelRequest;
     this.addPet = addPet;
-    this.editPet = editPet;
+    this.savePet = savePet;
     this.updatePet = updatePet;
 
   });
