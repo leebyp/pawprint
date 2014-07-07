@@ -9,13 +9,15 @@ angular.module('user.pet.directives')
         pet: '=pet',
         requests: '=requests',
         vaccines: '=vaccines',
-        index: '=index'
+        index: '=index',
+        userId: '=userId'
       },
       templateUrl: 'app/pet/templates/pet.tpl.html',
       link: function (scope) {
         scope.stopPropagation = function () {
           event.stopPropagation();
         };
+        
         scope.editingPet = false;
         scope.editPet = function (tempPet) {
           scope.stopPropagation();
@@ -32,12 +34,28 @@ angular.module('user.pet.directives')
           scope.editingPet = !scope.editingPet;
           scope.pet = scope.tempPet;
         };
-        scope.updatePet = function (userId, index) {
+
+        scope.updatingPet = false;
+        scope.updatePet = function () {
           scope.stopPropagation();
-          CurrentPetsService.updatePet(userId, index);
+          scope.updatingPet = !scope.updatingPet;
         };
-        scope.cancelRequest = function (userId, petIndex, requestIndex) {
-          CurrentPetsService.cancelRequest(userId, petIndex, requestIndex);
+        scope.sendUpdate = function (petId, index, chosenVet, newVet) {
+          scope.updatePet();
+          var request = {
+            pet_id: petId
+          };
+          if (chosenVet) {
+            request.vet_id = chosenVet.id;
+          }
+          CurrentPetsService.updatePet(index, request, newVet);
+        };
+        scope.cancelUpdate = function () {
+          scope.updatingPet = !scope.updatingPet;
+        };
+        
+        scope.cancelRequest = function (petIndex, requestIndex) {
+          CurrentPetsService.cancelRequest(petIndex, requestIndex);
         };
       }
     };

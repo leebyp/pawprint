@@ -20,8 +20,8 @@
             <button ng-if="!editingPet" class="btn btn-default" ng-click="editPet(pet)">EDIT</button>
             <button ng-if="editingPet" class="btn btn-default" ng-click="savePet(index)">SAVE</button>
             <button ng-if="editingPet" class="btn btn-default" ng-click="cancelEdit()">CANCEL</button>
-            <button class="btn btn-default">SEND</button>
-            <button ng-click="updatePet(userId, index)" class="btn btn-default">UPDATE</button>
+            <!-- <button class="btn btn-default">SEND</button> -->
+            <button ng-click="updatePet()" class="btn btn-default">UPDATE</button>
           </td>
           <td>
             <div ng-switch='pet.vaccineStatus'>
@@ -33,9 +33,54 @@
           </td>
         </tr>
       </table>
+      <div ng-show="updatingPet" class="" style="width:100%">
+        <span> Ask for an update on {{pet.name}} </span> <br>
+        <select ng-model="chosenVet" ng-options="vet.practiceName for vet in vets">
+          <option value=""> -- Please select a vet -- </option>
+        </select>
+        <form role="form">
+          <div class="form-group">
+            <label>Practice Name
+            <input ng-model="newVet.practiceName" class="form-control" placeholder="ABC Vets">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Website
+            <input ng-model="newVet.website" class="form-control" placeholder="www.vets.com">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Street Address
+            <input ng-model="newVet.streetAddress" class="form-control" placeholder="123 PuppyRoad">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>City
+            <input ng-model="newVet.city" class="form-control" placeholder="Dogville">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>State
+            <input ng-model="newVet.state" class="form-control" placeholder="CA">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Zip
+            <input ng-model="newVet.zip" class="form-control" placeholder="91422">
+            </label>
+          </div>
+          <div class="form-group">
+            <label>Phone
+            <input ng-model="newVet.phone" class="form-control" placeholder="(+1) 123 456 789">
+            </label>
+          </div>
+        </form>
+        <button class="btn btn-default" ng-click="cancelUpdate()">CANCEL</button>
+        <button class="btn btn-default" ng-click="sendUpdate(pet.id, index, chosenVet, newVet)">SEND</button>
+      </div>
     </accordion-heading>
-    <alert ng-repeat="request in requests" type="warning" close="cancelRequest(userId, index, $index)">
-      We are processing your request to {{request.vet.practice_name}}
+    <alert ng-repeat="request in requests" type="warning" close="cancelRequest(index, $index)">
+      We are processing your request to {{request.vet.practiceName}}
     </alert>
     <table class="" style="width:100%">
       <tr>
